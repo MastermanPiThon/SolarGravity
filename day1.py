@@ -20,14 +20,14 @@ class planet:
         self.ipos = ipos
 
     def positionx(self, t):
-        """ some mathy function """
+        """ Absolute Abscissa Position """
         R = self.distance
         i = self.ipos
         x = R * math.cos((t+i) / (R ** 1.5))
         return x
 
     def positiony(self, t):
-        """ some other mathy function """
+        """ Absolute Ordinate Position """
         R = self.distance
         i = self.ipos
         y = R * math.sin((t+i) / (R ** 1.5))
@@ -53,9 +53,11 @@ class star:
         self.color = color
 
     def positionx(self):
+        """ Absolute Abscissa Position """
         return 0
 
     def positiony(self):
+        """ Absolute Ordinate Position """
         return 0
 
     def draw(self, screen):
@@ -75,14 +77,14 @@ class player:
         self.y0 = y0
 
     def positionx(self, t):
-        """ some mathy function """
+        """ Absolute Abscissa Position """
         R = self.distance
         i = self.ipos
         x = R * math.cos((t+i) / (R ** 1.5))
         return x
 
     def positiony(self, t):
-        """ some other mathy function """
+        """ Absolute Ordinate Position """
         R = self.distance
         i = self.ipos
         y = R * math.sin((t+i) / (R ** 1.5))
