@@ -116,11 +116,15 @@ while 1:
     sun.draw(screen)
     mercury.draw(screen, t)
     venus.draw(screen, t)
-    
+
+    # Time Handling
     tick1 = pygame.time.get_ticks()
     t+=(tick1-tick0)*1.0
     tick0 = tick1
+
+    # The Flip
     pygame.display.flip()
+
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
