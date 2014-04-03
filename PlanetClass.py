@@ -31,12 +31,16 @@ class planet:
     def positionX(self, t, player, objects, timeinterval, scale):
         ''' Relative Abscissa Position '''
         xme = self.positionx(t)
-        xit = player.position(objects, t, timeinterval)
+        xit = player.position(objects, t, timeinterval)['x']
         X = (xme - xit)/scale + 320
         return X
         
-    #def positionY(self,t):
-        
+    def positionY(self,t):
+        ''' Relative Ordinate Position'''
+        yme = self.positionx(t)
+        yit = player.position(objects, t, timeinterval)['y']
+        Y = (xme - xit)/scale + 240
+        return Y
     
     def draw(self, screen, t):
         size = self.size
