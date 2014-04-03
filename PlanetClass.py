@@ -1,3 +1,10 @@
+#Import Library
+import math
+import random
+import pygame
+
+#from pygame.locals import * (what is this??)
+
 class planet:
     """ a planet """
     def __init__(self, size, distance, color, ipos, mass):
