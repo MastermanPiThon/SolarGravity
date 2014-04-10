@@ -9,32 +9,33 @@ class player:
     def __init__(self, size, color, Sx, Sy, Vx, Vy):
         self.size = size
         self.color = color
-        self.Sx = Sx
-        self.Sy = Sy
-        self.Vx = Vx
-        self.Vy = Vy
-        self.Ax = 0.0
-        self.Ay = 0.0
+        self.distx = Sx
+        self.disty = Sy
+        self.velx = Vx
+        self.vely = Vy
+        self.accex = 0.0
+        self.accey = 0.0
         #self.xarray = [x,x]
         #self.yarray = [y,y]
         #self.varray = [vx,vy]
         #self.aarray = [0,0]
         
 
-    def position(self, objects, t, ∆t):
+    def position(self, objects, t, Deltat):
         """ Absolute Position """
         #xarray[0] = xarray[1]
         #yarray[0] = yarray[1]
-        Sx = self.Sx
-        Sy = self.Sy
-        Vx = self.Vx
-        Vy = self.Vy
-        Ax = self.Ax
-        Ay = self.Ay
+        Sx = self.distx
+        Sy = self.disty
+        Vx = self.velx
+        Vy = self.vely
+        Ax = self.accex
+        Ay = self.accey
+
         
         #S i+1 redefinition
-        Sx += Vx * ∆t
-        Sy += Vy * ∆t
+        Sx += Vx * Deltat
+        Sy += Vy * Deltat
         
         #A i+1 redefinition
         Ax = 0.0
@@ -49,8 +50,8 @@ class player:
         #INSERT Player input
         
         #V i+3/2 redefinition
-        Vx += Ax * ∆t
-        Vy += Ay * ∆t
+        Vx += Ax * Deltat
+        Vy += Ay * Deltat
         
         
         return {'x' : Sx, 'y' : Sy}
