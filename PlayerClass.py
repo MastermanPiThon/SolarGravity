@@ -87,8 +87,8 @@ class player:
     def draw(self, screen, t):
         size = self.size
         color = self.color
-        x = int(self.positionx(t) + 320)
-        y = int(self.positiony(t) + 240)
-        pygame.draw.circle(screen, color, (x,y), size, 0)
+        x = 320
+        y = 240
+        pygame.draw.polygon(screen, color, [[x, y + size ], [x - size, y + size], [x + size, y + size]], 0)
         
         
