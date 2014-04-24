@@ -20,9 +20,17 @@ class star:
         """ Absolute Ordinate Position """
         return 0
 
-    def draw(self, screen):
+    def positionX(self, xplayer, scale):
+        """ Relative Abscissa Position """
+        return int(-xplayer * scale + 320)
+
+    def positionY(self, yplayer, scale):
+        """ Relative Ordinate Position """
+        return int(-yplayer * scale + 240)
+    
+    def draw(self, screen, xplayer, yplayer, scale):
         size = self.size
         color = self.color
-        x = int(self.positionx() + 320)
-        y = int(self.positiony() + 240)
+        x = self.positionX(xplayer, scale)
+        y = self.positionY(yplayer, scale)
         pygame.draw.circle(screen, color, (x,y), size, 0)

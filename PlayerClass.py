@@ -21,7 +21,7 @@ class player:
         #self.aarray = [0,0]
         
 
-    def position(self, objects, t, Deltat):
+    def position(self, planets, star, t, Deltat):
         """ Absolute Position """
         #xarray[0] = xarray[1]
         #yarray[0] = yarray[1]
@@ -41,12 +41,18 @@ class player:
         Ax = 0.0
         Ay = 0.0
         
-        for planet in objects:
+        for planet in planets:
             xdistance = planet.positionx(t) - Sx
             ydistance = planet.positiony(t) - Sy
             r = (xdistance ** 2 + ydistance ** 2) ** 0.5
             Ax += planet.mass / r ** 3 * xdistance
             Ay += planet.mass / r ** 3 * ydistance
+
+        xdistance = star.positionx() - Sx
+        ydistance = star.positiony() - Sy
+        r = (xdistance ** 2 + ydistance ** 2) ** 0.5
+        Ax += planet.mass / r ** 3 * xdistance
+        Ay += planet.mass / r ** 3 * ydistance
         #INSERT Player input
         
         #V i+3/2 redefinition
@@ -76,19 +82,22 @@ class player:
         aarray = [0,0]
         
         return [xarray[1], yarray[1]]
-        '''
-
-    #def positionX(self,t):
         
+   
+    def positionX(self,t):
+        """ Relative Abscissa Position """
+        return 320
         
-    #def positionY(self,t):
-        
-    
-    def draw(self, screen, t):
+    def positionY(self,t):
+        """ Relative Ordinate Position """
+        return 2
+    '''
+    def draw(self, screen):
         size = self.size
         color = self.color
         x = 320
         y = 240
-        pygame.draw.polygon(screen, color, [[x, y + size ], [x - size, y + size], [x + size, y + size]], 0)
+        pygame.draw.circle(screen, color, (x,y), size, 0)
+        #pygame.draw.polygon(screen, color, [[x, y + size ], [x - size, y + size], [x + size, y + size]], 0)
         
         

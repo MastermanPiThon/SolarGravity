@@ -15,25 +15,35 @@ screen = pygame.display.set_mode((width, height))
  
  
 t=0
+deltat = 0
 tick0 = pygame.time.get_ticks()
 tick1 = pygame.time.get_ticks()
 while 1:
     screen.fill(0)
-    sun = star(15, 0xeee8aa)
-    mercury = planet(5, 50, 0x3366FF, 0)
-    venus = planet(10, 100, 0x4B0082, 0)
-    #x = int(math.floor(50*math.cos(t)))
-    #y = int(math.floor(30*math.sin(t)))
-    #pygame.draw.circle(screen, 0x3366FF, (250+ x,250 + y), 10, 0)
-    #pygame.draw.circle(screen, 0x3366FF, (250+ 2*x,250 + 2*y), 10, 0)
-    sun.draw(screen)
-    mercury.draw(screen, t)
-    venus.draw(screen, t)
-    objects = [sun, mercury, venus]
+
+    # Create Objects
+    sun = star(15, 0xeee8aa, 100000000)
+    mercury = planet(5, 50, 0x3366FF, 0, 1)
+    venus = planet(10, 100, 0xFFCC66, 0, 1)
+    me = player(10, 0xFFFFFF, 75, -30, 0, 0)
+    planets = [mercury, venus]
+
+    # Find Player Position
+    splayer = me.position(planets, sun, t, deltat)
+    xplayer = splayer['x']
+    yplayer = splayer['y']
+
+    # Drawing
+    sun.draw(screen, xplayer, yplayer, 1)
+    mercury.draw(screen, xplayer, yplayer, 1, t)
+    venus.draw(screen, xplayer, yplayer, 1, t)
+    me.draw(screen)
+    print deltat
 
     # Time Handling
     tick1 = pygame.time.get_ticks()
-    t+=(tick1-tick0)*1.0
+    deltat = (tick1-tick0)*1.0
+    t+=deltat
     tick0 = tick1
 
     # The Flip

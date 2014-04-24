@@ -28,23 +28,21 @@ class planet:
         y = R * math.sin((t+i) / (R ** 1.5))
         return y
 
-    def positionX(self, t, player, objects, timeinterval, scale):
+    def positionX(self, t, xplayer, scale):
         ''' Relative Abscissa Position '''
         xme = self.positionx(t)
-        xit = player.position(objects, t, timeinterval)['x']
-        X = (xme - xit)/scale + 320
+        X = int((xme - xplayer)*scale) + 320
         return X
         
-    def positionY(self,t):
+    def positionY(self, t, yplayer, scale):
         ''' Relative Ordinate Position'''
-        yme = self.positionx(t)
-        yit = player.position(objects, t, timeinterval)['y']
-        Y = (xme - xit)/scale + 240
+        yme = self.positiony(t)
+        Y = int((yme - yplayer)*scale) + 240
         return Y
     
-    def draw(self, screen, t):
+    def draw(self, screen, xplayer, yplayer, scale, t):
         size = self.size
         color = self.color
-        x = int(self.positionx(t) + 320)
-        y = int(self.positiony(t) + 240)
+        x = self.positionX(t, xplayer, scale)
+        y = self.positionY(t, yplayer, scale)
         pygame.draw.circle(screen, color, (x,y), size, 0)
