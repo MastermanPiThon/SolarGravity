@@ -9,12 +9,12 @@ class player:
     def __init__(self, size, color, Sx, Sy, Vx, Vy):
         self.size = size
         self.color = color
-        self.distx = Sx
-        self.disty = Sy
-        self.velx = Vx
-        self.vely = Vy
-        self.accex = 0.0
-        self.accey = 0.0
+        self.Sx = Sx
+        self.Sy = Sy
+        self.Vx = Vx
+        self.Vy = Vy
+        self.Ax = 0.0
+        self.Ay = 0.0
         #self.xarray = [x,x]
         #self.yarray = [y,y]
         #self.varray = [vx,vy]
@@ -23,44 +23,35 @@ class player:
 
     def position(self, planets, star, t, Deltat):
         """ Absolute Position """
-        #xarray[0] = xarray[1]
-        #yarray[0] = yarray[1]
-        Sx = self.distx
-        Sy = self.disty
-        Vx = self.velx
-        Vy = self.vely
-        Ax = self.accex
-        Ay = self.accey
 
-        
         #S i+1 redefinition
-        Sx += Vx * Deltat
-        Sy += Vy * Deltat
+        self.Sx += self.Vx * Deltat
+        self.Sy += self.Vy * Deltat
         
         #A i+1 redefinition
-        Ax = 0.0
-        Ay = 0.0
-        
+        self.Ax = 0.0
+        self.Ay = 0.0
         for planet in planets:
-            xdistance = planet.positionx(t) - Sx
-            ydistance = planet.positiony(t) - Sy
-            r = (xdistance ** 2 + ydistance ** 2) ** 0.5
-            Ax += planet.mass / r ** 3 * xdistance
-            Ay += planet.mass / r ** 3 * ydistance
-
-        xdistance = star.positionx() - Sx
-        ydistance = star.positiony() - Sy
-        r = (xdistance ** 2 + ydistance ** 2) ** 0.5
-        Ax += planet.mass / r ** 3 * xdistance
-        Ay += planet.mass / r ** 3 * ydistance
+            xdistance = planet.positionx(t) - self.Sx
+            ydistance = planet.positiony(t) - self.Sy
+            r = (xdistance ** 2 + ydistance ** 2) ** 0.5 + 10
+            print r
+            self.Ax += planet.mass / r ** 3 * xdistance
+            self.Ay += planet.mass / r ** 3 * ydistance
+        xdistance = star.positionx() - self.Sx
+        ydistance = star.positiony() - self.Sy
+        r = (xdistance ** 2 + ydistance ** 2) ** 0.5 + 10
+        print r
+        self.Ax += planet.mass / r ** 3 * xdistance
+        self.Ay += planet.mass / r ** 3 * ydistance
         #INSERT Player input
         
         #V i+3/2 redefinition
-        Vx += Ax * Deltat
-        Vy += Ay * Deltat
+        self.Vx += self.Ax * Deltat
+        self.Vy += self.Ay * Deltat
         
         
-        return {'x' : Sx, 'y' : Sy}
+        return {'x' : self.Sx, 'y' : self.Sy}
         
         '''
         for planet in objects:

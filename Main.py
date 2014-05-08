@@ -12,21 +12,20 @@ from StarClass import *
 pygame.init()
 width, height = 640, 480
 screen = pygame.display.set_mode((width, height))
- 
+
+#Create Objects
+sun = star(15, 0xeee8aa, 10)
+mercury = planet(5, 50, 0x3366FF, 0, 1)
+venus = planet(10, 100, 0xFFCC66, 0, 1)
+me = player(10, 0xFFFFFF, 75, -30, 0, 0)
+planets = [mercury, venus]
  
 t=0
-deltat = 0
+deltat = 10
 tick0 = pygame.time.get_ticks()
 tick1 = pygame.time.get_ticks()
 while 1:
     screen.fill(0)
-
-    # Create Objects
-    sun = star(15, 0xeee8aa, 100000000)
-    mercury = planet(5, 50, 0x3366FF, 0, 1)
-    venus = planet(10, 100, 0xFFCC66, 0, 1)
-    me = player(10, 0xFFFFFF, 75, -30, 0, 0)
-    planets = [mercury, venus]
 
     # Find Player Position
     splayer = me.position(planets, sun, t, deltat)
@@ -38,7 +37,6 @@ while 1:
     mercury.draw(screen, xplayer, yplayer, 1, t)
     venus.draw(screen, xplayer, yplayer, 1, t)
     me.draw(screen)
-    print deltat
 
     # Time Handling
     tick1 = pygame.time.get_ticks()
