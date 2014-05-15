@@ -2,6 +2,7 @@
 import math
 import random
 import pygame
+from pygame.locals import *
 
 #import pygame.locals import * (what is this??)
 
@@ -19,9 +20,36 @@ class player:
         #self.yarray = [y,y]
         #self.varray = [vx,vy]
         #self.aarray = [0,0]
-        
 
-    def position(self, planets, star, t, Deltat):
+    def input(self, keys):
+
+        for event in pygame.event.get():
+            # check if the event is the X button 
+            #if event.type==pygame.QUIT:
+                # if it is quit the game
+                #pygame.quit() 
+                #exit(0)
+            if event.type == pygame.KEYDOWN:
+                if event.key==K_w:
+                    keys[0]=True
+                elif event.key==K_a:
+                    keys[1]=True
+                elif event.key==K_s:
+                    keys[2]=True
+                elif event.key==K_d:
+                    keys[3]=True
+            if event.type == pygame.KEYUP:
+                if event.key==pygame.K_w:
+                    keys[0]=False
+                elif event.key==pygame.K_a:
+                    keys[1]=False
+                elif event.key==pygame.K_s:
+                    keys[2]=False
+                elif event.key==pygame.K_d:
+                    keys[3]=False
+    
+
+    def position(self, planets, star, t, Deltat, keys):
         """ Absolute Position """
 
         #S i+1 redefinition
@@ -34,17 +62,26 @@ class player:
         for planet in planets:
             xdistance = planet.positionx(t) - self.Sx
             ydistance = planet.positiony(t) - self.Sy
-            r = (xdistance ** 2 + ydistance ** 2) ** 0.5 + 10
-            print r
+            r = (xdistance ** 2 + ydistance ** 2) ** 0.5 + 5
+            #print r
             self.Ax += planet.mass / r ** 3 * xdistance
             self.Ay += planet.mass / r ** 3 * ydistance
         xdistance = star.positionx() - self.Sx
         ydistance = star.positiony() - self.Sy
-        r = (xdistance ** 2 + ydistance ** 2) ** 0.5 + 10
-        print r
+        r = (xdistance ** 2 + ydistance ** 2) ** 0.5 + 5
+        #print r
         self.Ax += planet.mass / r ** 3 * xdistance
         self.Ay += planet.mass / r ** 3 * ydistance
-        #INSERT Player input
+        #Player input
+        if keys[0]:
+            self.Ay += 1
+        if keys[1]:
+            self.Ax -= 1
+        if keys[2]:
+            self.Ay -= 1
+        if keys[3]:
+            self.Ax += 1
+        
         
         #V i+3/2 redefinition
         self.Vx += self.Ax * Deltat

@@ -14,21 +14,29 @@ width, height = 640, 480
 screen = pygame.display.set_mode((width, height))
 
 #Create Objects
-sun = star(15, 0xeee8aa, 10)
-mercury = planet(5, 50, 0x3366FF, 0, 1)
-venus = planet(10, 100, 0xFFCC66, 0, 1)
+sun = star(15, 0xeee8aa, 70)
+mercury = planet(5, 50, 0x3366FF, 0, .1)
+venus = planet(10, 100, 0xFFCC66, 0, .1)
 me = player(10, 0xFFFFFF, 75, -30, 0, 0)
 planets = [mercury, venus]
- 
+
+#initialize time
 t=0
 deltat = 10
 tick0 = pygame.time.get_ticks()
 tick1 = pygame.time.get_ticks()
+
+#initialize input
+keys = [False, False, False, False]
+
 while 1:
     screen.fill(0)
 
+    #register Player Input
+    me.input(keys)
+    
     # Find Player Position
-    splayer = me.position(planets, sun, t, deltat)
+    splayer = me.position(planets, sun, t, deltat, keys)
     xplayer = splayer['x']
     yplayer = splayer['y']
 
