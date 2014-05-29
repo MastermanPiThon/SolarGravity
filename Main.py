@@ -33,7 +33,7 @@ while 1:
     screen.fill(0)
 
     #register Player Input
-    me.input(keys)
+    me.input(keys) 
     
     # Find Player Position
     splayer = me.position(planets, sun, t, deltat, keys)
@@ -44,7 +44,7 @@ while 1:
     sun.draw(screen, xplayer, yplayer, 1)
     mercury.draw(screen, xplayer, yplayer, 1, t)
     venus.draw(screen, xplayer, yplayer, 1, t)
-    me.draw(screen)
+    me.draw(screen, keys)
 
     # Time Handling
     tick1 = pygame.time.get_ticks()
@@ -59,3 +59,7 @@ while 1:
         if event.type==pygame.QUIT:
             pygame.quit()
             exit(0)
+            
+
+    
+    

@@ -2,6 +2,7 @@
 import math
 import random
 import pygame
+from pygame.draw import *
 from pygame.locals import *
 
 #import pygame.locals import * (what is this??)
@@ -120,12 +121,29 @@ class player:
         """ Relative Ordinate Position """
         return 2
     '''
-    def draw(self, screen):
+    def draw(self, screen,Key):
         size = self.size
         color = self.color
         x = 320
         y = 240
         pygame.draw.circle(screen, color, (x,y), size, 0)
         #pygame.draw.polygon(screen, color, [[x, y + size ], [x - size, y + size], [x + size, y + size]], 0)
-        
-        
+        exhaustx = x
+        exhausty = y
+        if Key[0]:
+            exhausty -= size/2
+            exhaustx -= size/4
+        elif Key[1]:
+            exhausty += size/4
+            exhaustx += size/2
+        elif Key[2]:
+            exhausty += size/2
+            exhaustx += size/4
+        elif Key[3]:
+            exhausty -= size/4
+            exhaustx -= size/2
+        pygame.draw.rect(screen,color,Rect(exhaustx,exhausty,size/2,size/2), 0)
+
+    print (Key)
+            
+            
