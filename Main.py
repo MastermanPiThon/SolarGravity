@@ -33,7 +33,30 @@ while 1:
     screen.fill(0)
 
     #register Player Input
-    me.input(keys) 
+    for event in pygame.event.get():
+        # check if the event is the X button 
+        #if event.type==pygame.QUIT:
+            # if it is quit the game
+            #pygame.quit() 
+            #exit(0)
+        if event.type == pygame.KEYDOWN:
+            if event.key==K_w:
+                keys[0]=True
+            elif event.key==K_a:
+                keys[1]=True
+            elif event.key==K_s:
+                keys[2]=True
+            elif event.key==K_d:
+                keys[3]=True
+        if event.type == pygame.KEYUP:
+            if event.key==pygame.K_w:
+                keys[0]=False
+            elif event.key==pygame.K_a:
+                keys[1]=False
+            elif event.key==pygame.K_s:
+                keys[2]=False
+            elif event.key==pygame.K_d:
+                keys[3]=False 
     
     # Find Player Position
     splayer = me.position(planets, sun, t, deltat, keys)
